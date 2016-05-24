@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>图片轮播</title>
+
+		<style type="text/css">
+			*{margin:0; padding:0;}
+			.bannerbox{width:760px; height:300px; position:relative; margin:50px auto;}
+			.banner{width:760px; height:300px; overflow:hidden;}
+			.bannerbox ul li{width:760px; height:300px; margin:0 auto; position:relative; overflow:hidden;}
+			.txt{position:absolute; top:0; left:-760px;}
+			.pic{position:absolute; top:0; left:-20px; display:none;}
+			.xiab{position:absolute; bottom:20px; right:20px;}
+			.xiab ul li{width:15px; height:15px; border:1px solid #fff; float:left; margin:5px; cursor:pointer;}
+			.select{background:#fff;}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="bannerbox">
+			<div class="banner">
+				<ul>
+					<li style="background:url(img/bg1.jpg) no-repeat;">
+						<img src="img/text1.png" class="txt">
+						<img src="img/con1.png" class="pic">
+					</li>
+					<li style="background:url(img/bg2.jpg) no-repeat;">
+						<img src="img/text2.png" class="txt">
+						<img src="img/con2.png" class="pic">
+					</li>
+					<li style="background:url(img/bg3.jpg) no-repeat;">
+						<img src="img/text3.png" class="txt">
+						<img src="img/con3.png" class="pic">
+					</li>
+					<li style="background:url(img/bg4.jpg) no-repeat;">
+						<img src="img/text4.png" class="txt">
+						<img src="img/con4.png" class="pic">
+					</li>
+					<li style="background:url(img/bg5.jpg) no-repeat;">
+						<img src="img/text5.png" class="txt">
+						<img src="img/con5.png" class="pic">
+					</li>
+				</ul>
+			</div>
+		
+			<div class="xiab">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="jquery-1.12.3.js"></script>
+
+		<script type="text/javascript">
+			var index = 0;
+			myshow();
+			
+			function myshow(){
+				$(".banner ul li").eq(index).find(".txt").animate({left:0},1000);
+				$(".banner ul li").eq(index).find(".pic").animate({left:0},1000).css("display","block");
+			}
+			
+			function myhidden(){
+				$(".banner ul li").eq(index).siblings().find(".txt").css("left","-760px");
+				$(".banner ul li").eq(index).siblings().find(".pic").css({"left":"-20px","display":"none"});
+			}
+
+			setInterval("change()",2000);
+
+			function change(){
+				index++;
+				if(index == $(".banner ul li").length){
+					index = 0;
+				}
+				$(".banner ul li").eq(index).fadeIn(300).siblings().fadeOut(300);
+				$(".xiab ul li").eq(index).addClass("select").siblings().removeClass("select");
+				myshow();
+				myhidden();
+			}
+
+		</script>
+	</body>
+
+</html>
